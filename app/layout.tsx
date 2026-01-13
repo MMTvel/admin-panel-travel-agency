@@ -6,7 +6,6 @@ import "./globals.css"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-import { MetaPixelInitializer } from "@/components/meta-pixel-initializer"
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core"
@@ -121,7 +120,6 @@ export default function RootLayout({
         <Analytics />
         <Footer />
         <ScrollToTop />
-        <MetaPixelInitializer />
       </body>
     </html>
   )
