@@ -8,6 +8,7 @@ import { PackageDialog } from "./package-dialog"
 import { PackageCard } from "./package-card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "./ui/button"
+import { IconRenderer } from "./icon-renderer"
 
 interface Package {
     id: number
@@ -82,7 +83,11 @@ export function FeatureCard({
         <div className="space-y-2">
             <div className="relative group">
                 <Card className="p-6 flex flex-col lg:flex-row lg:items-start gap-6 bg-card border border-border hover:border-primary/40 hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
-                    <div className="text-4xl shrink-0 p-4 bg-primary/10 rounded-lg h-fit">{icon}</div>
+                    <div className="text-4xl shrink-0 p-4 bg-primary/10 rounded-lg h-fit">
+                        <div className="w-12 h-12 flex items-center justify-center bg-muted rounded-md">
+                            <IconRenderer name={icon} className="h-6 w-6" fallbackClassName="h-6 w-6 opacity-40" />
+                        </div>
+                    </div>
 
                     <div className="flex-1 min-w-0 space-y-4">
                         <div>

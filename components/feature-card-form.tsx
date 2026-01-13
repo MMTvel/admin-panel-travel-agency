@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Plus, X } from "lucide-react"
+import { IconRenderer } from "@/components/icon-renderer"
 
 interface FeatureCard {
     id?: number
@@ -25,7 +26,7 @@ interface FeatureCardFormProps {
 
 export function FeatureCardForm({ onSubmit, isLoading = false, initialData }: FeatureCardFormProps) {
     const [formData, setFormData] = useState<FeatureCard>({
-        icon: "⭐",
+        icon: "",
         title: "",
         description: "",
         bulletPoints: ["", ""],
@@ -77,18 +78,22 @@ export function FeatureCardForm({ onSubmit, isLoading = false, initialData }: Fe
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-                <label className="block text-sm font-medium text-foreground">Icon (emoji)</label>
+                <label className="block text-sm font-medium text-foreground">Icon (Lucide Icon Name)</label>
                 <div className="flex gap-2">
-                    <div className="text-4xl w-12 h-12 flex items-center justify-center bg-muted rounded-md">{formData.icon}</div>
+                    <div className="w-12 h-12 flex items-center justify-center bg-muted rounded-md">
+                        <IconRenderer name={formData.icon} className="h-6 w-6" fallbackClassName="h-6 w-6 opacity-40" />
+                    </div>
                     <Input
                         type="text"
                         value={formData.icon}
-                        onChange={(e) => setFormData({ ...formData, icon: e.target.value.slice(0, 2) })}
-                        maxLength={2}
+                        onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
                         className="flex-1"
-                        placeholder="Enter emoji"
+                        placeholder="e.g., Heart, Star, Settings, Zap"
                     />
                 </div>
+                <p className="text-xs text-muted-foreground">
+                    Enter any lucide-react icon name (e.g., Heart, Star, Zap, Settings, Users)
+                </p>
             </div>
 
             <div className="space-y-2">
@@ -107,11 +112,9 @@ export function FeatureCardForm({ onSubmit, isLoading = false, initialData }: Fe
                     type="text"
                     value={formData.url}
                     onChange={(e) => {
-                        const formattedValue = e.target.value
-                            .toLowerCase()
-                            .replace(/\s/g, '-');
+                        const formattedValue = e.target.value.toLowerCase().replace(/\s/g, "-")
 
-                        setFormData({ ...formData, url: formattedValue });
+                        setFormData({ ...formData, url: formattedValue })
                     }}
                     placeholder="Service URL"
                     className="bg-input text-foreground"
